@@ -6,7 +6,6 @@ import { AccountService } from 'app/core/auth/account.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SessionStorageService } from 'ngx-webstorage';
 import { TranslateService } from '@ngx-translate/core';
-import { EventManager } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-login',
@@ -35,8 +34,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
     private fb: FormBuilder,
     private snackBar: MatSnackBar,
     private sessionStorage: SessionStorageService,
-    public translateService: TranslateService,
-    private eventManager: EventManager
+    public translateService: TranslateService
   ) {}
 
   ngOnInit(): void {
