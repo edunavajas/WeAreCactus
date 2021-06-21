@@ -1,47 +1,53 @@
 <div class="col-12 w-100 fondo" style="height: 100% !important">
-  <!--  <div class='card login-body border-radius-login' style='height: 20%; margin-top: 16%;'>-->
-  <div class="card login-body border-radius-login" style="z-index: 1">
-    <div class="row justify-content-center pt-3">
-      <div class="col-12">
-        <div class="alert alert-danger" *ngIf="authenticationError">
-          <strong>Fallo en el Login</strong> <br />Por favor, comprueba los datos e inténtalo de nuevo
-        </div>
-      </div>
+  <a
+    ><img
+      class="mr-1"
+      style="max-width: 34px !important; height: auto; float: right"
+      [src]="imgSourceEsp"
+      alt="esp"
+      (click)="changeLanguage('es')"
+  /></a>
+  <a
+    ><img
+      class="mr-3"
+      style="max-width: 34px !important; height: auto; float: right"
+      [src]="imgSourceIng"
+      alt="ing"
+      (click)="changeLanguage('en')"
+  /></a>
 
-      <div class="col-12 mt-4">
+  <div class="card login-body border-radius-login" style="z-index: 1">
+    <div class="alert alert-danger mt-3 m-3" *ngIf="authenticationError">
+      <span appTranslate="login.messages.error.authentication_html">
+        <strong>Login failed</strong> <br />Please check the details and try again</span
+      >
+    </div>
+    <div class="row justify-content-center pt-3">
+      <div class="col-12 mt-2">
+        <h2 class="titleColor" appTranslate="login.title">Login</h2>
         <form class="form" role="form" (ngSubmit)="login()" [formGroup]="loginForm">
           <mat-form-field class="example-full-width">
-            <mat-label>Username</mat-label>
+            <mat-label appTranslate="login.form.username">Username</mat-label>
             <input matInput name="username" id="username" formControlName="username" #username />
           </mat-form-field>
           <mat-form-field class="example-full-width">
-            <mat-label>Password</mat-label>
+            <mat-label appTranslate="login.form.password">Password</mat-label>
             <input matInput name="password" id="password" type="password" formControlName="password" />
           </mat-form-field>
-
-          <!--          <div class='form-group start-aling-formgroup'>-->
-          <!--            <label class='negrita labels' for='password'> Password </label><br />-->
-          <!--            <span class='p-input-icon-right'>-->
-          <!--            <i class='pi pi-lock'></i>-->
-          <!--            <input type='password' class='form-control border-radius-login' name='password' id='password'-->
-          <!--                   formControlName='password' />-->
-          <!--          </span>-->
-          <!--          </div>-->
 
           <div class="row">
             <div class="form-check">
               <div class="col-md-12">
                 <label class="form-check-label" for="rememberMe">
                   <input class="form-check-input" type="checkbox" name="rememberMe" id="rememberMe" formControlName="rememberMe" />
-                  <span> Remember me </span>
+                  <span appTranslate="login.form.rememberme"> Remember me </span>
                 </label>
               </div>
             </div>
           </div>
-          <button type="submit" class="btn btn-login w-100 negrita">Log in</button>
+          <button type="submit" class="btn btn-login w-100 negrita" appTranslate="login.title">Log in</button>
         </form>
       </div>
     </div>
   </div>
-  <!--  </div>-->
 </div>
