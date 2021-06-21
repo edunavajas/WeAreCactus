@@ -2,6 +2,7 @@
   "login": {
     "title": "Sign in",
     "form": {
+      "username": "Username",
       "password": "Password",
       "password.placeholder": "Your password",
       "rememberme": "Remember me",
@@ -9,7 +10,9 @@
     },
     "messages": {
       "error": {
-        "authentication": "<strong>Failed to sign in!</strong> Please check your credentials and try again."
+        "accept": "Accept",
+        "authentication_html": "<strong>Failed to sign in!</strong> Please check your credentials and try again.",
+        "authentication": "Failed to sign in! Please check your credentials and try again."
       }
     }
   }
