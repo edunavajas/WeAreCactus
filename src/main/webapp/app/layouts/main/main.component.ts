@@ -23,6 +23,10 @@ export class MainComponent implements OnInit {
     this.renderer = rootRenderer.createRenderer(document.querySelector('html'), null);
   }
 
+  isAuthenticated(): boolean {
+    return this.accountService.isAuthenticated();
+  }
+
   ngOnInit(): void {
     this.accountService.identity().subscribe();
 

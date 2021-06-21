@@ -146,3 +146,171 @@ a:hover {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+// new
+
+.btn.btn-secondary {
+  border-color: #375bd2 !important;
+  background-color: #fff !important;
+  -webkit-transition: background-color 0.3s, border-color 0.3s, color 0.3s !important;
+  transition: background-color 0.3s, border-color 0.3s, color 0.3s !important;
+  color: #375bd2 !important;
+  -webkit-transition: background-color 0.3s, border-color 0.3s, color 0.3s !important;
+  transition: background-color 0.3s, border-color 0.3s, color 0.3s !important;
+}
+
+//input.w-button {
+//  -webkit-appearance: button !important;
+//}
+
+.btn {
+  padding: 16px 32px !important;
+  border: 2px solid #e7e8ea !important;
+  border-radius: 4px !important;
+  background-color: #e7e8ea !important;
+  box-shadow: 0 12px 32px -12px rgb(12 22 44 / 32%) !important;
+  color: #6d7380 !important;
+  line-height: 20px !important;
+  text-decoration: none !important;
+}
+
+.w-button {
+  display: inline-block;
+  padding: 9px 15px;
+  border: 0;
+  line-height: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 0;
+  border-color: #375bd2 !important;
+  background-color: #fff !important;
+  color: #375bd2 !important;
+}
+
+.w-button:hover {
+  background-color: #dbe2e9 !important;
+  color: #665f61 !important;
+  border: 1px solid #252e42 !important;
+}
+
+//.cta-subscribe-input {
+//  width: 416px;
+//  height: 56px;
+//  max-height: 56px;
+//  max-width: 416px;
+//  min-height: 56px;
+//  margin-right: 16px;
+//  margin-bottom: 0;
+//  padding-right: 24px;
+//  padding-left: 24px;
+//  border: 2px solid #ced0d5;
+//  border-radius: 4px;
+//  box-shadow: 0 12px 32px -12px rgb(12 22 44 / 32%);
+//}
+
+//.w-input,
+//.w-select {
+//  display: block;
+//  width: 100%;
+//  height: 38px;
+//  padding: 8px 12px;
+//  margin-bottom: 10px;
+//  font-size: 14px;
+//  line-height: 1.42857143;
+//  color: #333;
+//  vertical-align: middle;
+//  background-color: #fff;
+//  border: 1px solid #ccc;
+//}
+
+.negrita {
+  font-weight: bold !important;
+}
+
+app-login {
+  height: 100% !important;
+  background: linear-gradient(90deg, #3660a4 0, #724a8e);
+  display: block;
+}
+
+button.btn-link {
+  padding: 1px 5px !important;
+}
+
+mat-sidenav-content {
+  overflow-x: hidden !important; /* Hide horizontal scrollbar */
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+.page-item.active .page-link {
+  background: #ffffff !important;
+  color: #375bd2 !important;
+  border: 2px solid #375bd2;
+}
+
+::-webkit-scrollbar-track-piece {
+  background-color: #fff;
+}
+
+.page-link {
+  background: #ffffff !important;
+  color: #375bd2 !important;
+}
+
+.page-item.disabled {
+  border: 1px solid #375bd2;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #cbcbcb;
+  outline: 2px solid #fff;
+  outline-offset: -2px;
+  border: 0.1px solid #b7b7b7;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #909090;
+}
+
+.card-alert-header {
+  background-color: #ffe680;
+}
+
+.p-buttonset .p-button:first-of-type {
+  border: 1px solid #cd2337 !important;
+}
+
+.p-buttonset .p-button:not(:last-child) {
+  border: 1px solid #3dcd23 !important;
+}
+
+.p-confirm-popup-accept {
+  background-color: #fff !important;
+  color: #cd2337 !important;
+  border: 1px solid #cd2337 !important;
+}
+
+.p-confirm-popup-accept:hover {
+  background-color: rgba(205, 35, 55, 0.31) !important;
+  color: #000000 !important;
+  border: 1px solid #070707 !important;
+}
+
+.p-confirm-popup-reject {
+  background-color: #fff !important;
+  color: #008f39 !important;
+  border: 1px solid #008f39 !important;
+}
+
+.p-confirm-popup-reject:hover {
+  background-color: rgba(195, 255, 197, 0.6) !important;
+  color: #000000 !important;
+  border: 1px solid #000000 !important;
+}
+
+.p-confirm-popup {
+  box-shadow: -2px 4px 10px 0px rgb(0 0 0 / 10%);
+}

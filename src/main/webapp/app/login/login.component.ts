@@ -7,6 +7,7 @@ import { AccountService } from 'app/core/auth/account.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
+  styleUrls: ['./login.scss'],
 })
 export class LoginComponent implements OnInit, AfterViewInit {
   @ViewChild('username', { static: false })
@@ -52,7 +53,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
         () => {
           this.authenticationError = false;
           if (!this.router.getCurrentNavigation()) {
-            this.router.navigate(['']);
+            this.router.navigate(['/product']);
           }
         },
         () => (this.authenticationError = true)
