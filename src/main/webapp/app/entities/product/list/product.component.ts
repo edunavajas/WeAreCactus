@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { combineLatest } from 'rxjs';
@@ -9,12 +9,21 @@ import { IProduct } from '../product.model';
 import { ITEMS_PER_PAGE } from 'app/config/pagination.constants';
 import { ProductService } from '../service/product.service';
 import { ProductDeleteDialogComponent } from '../delete/product-delete-dialog.component';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { PRODUCTS_DATA } from 'app/entities/product/list/product.data';
 
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
+  styleUrls: ['../product.component.scss'],
 })
-export class ProductComponent implements OnInit {
+export class ProductComponent implements OnInit, AfterViewInit {
+  displayedColumns: string[] = ['id', 'name', 'description', 'color', 'size', 'status', 'created_at', 'updated_at'];
+  dataSource = new MatTableDataSource<IProduct>(PRODUCTS_DATA);
+
+  @ViewChild(MatPaginator) paginator?: MatPaginator;
+
   products?: IProduct[];
   isLoading = false;
   totalItems = 0;
@@ -30,6 +39,12 @@ export class ProductComponent implements OnInit {
     protected router: Router,
     protected modalService: NgbModal
   ) {}
+
+  ngAfterViewInit(): void {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    this.dataSource.paginator = this.paginator;
+  }
 
   loadPage(page?: number, dontNavigate?: boolean): void {
     this.isLoading = true;

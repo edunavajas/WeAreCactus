@@ -1,5 +1,9 @@
 {
   "wearecactusApp": {
-    "product": {}
+    "product": {
+      "home": {
+        "title": "Products"
+      }
+    }
   }
 }

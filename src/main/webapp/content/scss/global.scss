@@ -71,6 +71,7 @@ a:hover {
 .alerts {
   .alert {
     text-overflow: ellipsis;
+
     pre {
       background: none;
       border: none;
@@ -79,22 +80,28 @@ a:hover {
       padding: 0;
       margin: 0;
     }
+
     .popover pre {
       font-size: 10px;
     }
   }
+
   .app-toast {
     position: fixed;
     width: 100%;
+
     &.left {
       left: 5px;
     }
+
     &.right {
       right: 5px;
     }
+
     &.top {
       top: 55px;
     }
+
     &.bottom {
       bottom: 55px;
     }
@@ -125,6 +132,7 @@ a:hover {
       white-space: nowrap;
       padding: 0.5em 0;
     }
+
     dd {
       border-bottom: 1px solid #eee;
       padding: 0.5em 0;
@@ -283,4 +291,107 @@ mat-sidenav-content {
 
 .p-confirm-popup {
   box-shadow: -2px 4px 10px 0px rgb(0 0 0 / 10%);
+}
+
+.titleColor {
+  color: #1a2b6b;
+  font-weight: bold;
+  font-family: Kanit, sans-serif !important;
+}
+
+.section-white-diagonal-top {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: auto;
+  width: 110vw;
+  height: 200px;
+  margin-top: -100px;
+  margin-left: -5vw;
+  background-color: #fff;
+  -webkit-transform: rotate(-4deg);
+  -ms-transform: rotate(-4deg);
+  transform: rotate(-4deg);
+}
+
+section-white-diagonal-top {
+  margin-top: -156px;
+}
+
+.section-white-diagonal-bottom {
+  position: absolute;
+  left: 0;
+  top: auto;
+  right: 0;
+  bottom: 0;
+  width: 110vw;
+  height: 200px;
+  margin-top: 0;
+  margin-bottom: -100px;
+  margin-left: -5vw;
+  background-color: #fff;
+  -webkit-transform: rotate(-4deg);
+  -ms-transform: rotate(-4deg);
+  transform: rotate(-4deg);
+}
+
+.section-white-diagonal-bottom.hidden {
+  display: none;
+}
+
+tr.mat-header-row {
+  background-color: #375bd2;
+}
+
+.mat-paginator-container {
+  color: white;
+  background-color: #375bd2;
+}
+
+.mat-paginator,
+.mat-paginator-page-size .mat-select-trigger {
+  color: white !important;
+}
+
+.mat-select-value {
+  color: white !important;
+}
+
+.mat-select-arrow {
+  color: white !important;
+}
+.mat-form-field-ripple {
+  background-color: white !important;
+}
+
+.mat-form-field-appearance-legacy .mat-form-field-underline {
+  background-color: white;
+}
+
+.mat-button.mat-primary.mat-button-disabled,
+.mat-button.mat-accent.mat-button-disabled,
+.mat-button.mat-warn.mat-button-disabled,
+.mat-button.mat-button-disabled.mat-button-disabled,
+.mat-icon-button.mat-primary.mat-button-disabled,
+.mat-icon-button.mat-accent.mat-button-disabled,
+.mat-icon-button.mat-warn.mat-button-disabled,
+.mat-icon-button.mat-button-disabled.mat-button-disabled,
+.mat-stroked-button.mat-primary.mat-button-disabled,
+.mat-stroked-button.mat-accent.mat-button-disabled,
+.mat-stroked-button.mat-warn.mat-button-disabled,
+.mat-stroked-button.mat-button-disabled.mat-button-disabled {
+  color: white;
+}
+
+.mat-select-panel {
+  background: #375bd2;
+}
+
+.mat-option {
+  color: white;
+}
+
+.mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
+  color: #dfe7fb;
 }

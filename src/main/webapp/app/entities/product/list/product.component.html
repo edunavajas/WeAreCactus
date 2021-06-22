@@ -1,52 +1,113 @@
 <div>
   <h2 id="page-heading" data-cy="ProductHeading">
-    <span appTranslate="wearecactusApp.product.home.title">Products</span>
+    <span class="titleColor" appTranslate="wearecactusApp.product.home.title">Products</span>
 
-    <div class="d-flex justify-content-end">
-      <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
-        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
-        <span appTranslate="wearecactusApp.product.home.refreshListLabel">Refresh List</span>
-      </button>
+    <!--    <div class="d-flex justify-content-end">-->
+    <!--      <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">-->
+    <!--        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>-->
+    <!--        <span appTranslate="wearecactusApp.product.home.refreshListLabel">Refresh List</span>-->
+    <!--      </button>-->
 
-      <button
-        id="jh-create-entity"
-        data-cy="entityCreateButton"
-        class="btn btn-primary jh-create-entity create-product"
-        [routerLink]="['/product/new']"
-      >
-        <fa-icon icon="plus"></fa-icon>
-        <span appTranslate="wearecactusApp.product.home.createLabel"> Create a new Product </span>
-      </button>
-    </div>
+    <!--      <button-->
+    <!--        id="jh-create-entity"-->
+    <!--        data-cy="entityCreateButton"-->
+    <!--        class="btn btn-primary jh-create-entity create-product"-->
+    <!--        [routerLink]="['/product/new']"-->
+    <!--      >-->
+    <!--        <fa-icon icon="plus"></fa-icon>-->
+    <!--        <span appTranslate="wearecactusApp.product.home.createLabel"> Create a new Product </span>-->
+    <!--      </button>-->
+    <!--    </div>-->
   </h2>
 
   <div class="alert alert-warning" id="no-result" *ngIf="products?.length === 0">
     <span appTranslate="wearecactusApp.product.home.notFound">No products found</span>
   </div>
 
+  <div class="mat-elevation-z8">
+    <table mat-table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp table table-striped" [dataSource]="dataSource">
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef style="width: 20%; color: white; padding: 1%">Id</th>
+        <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef style="width: 30%; color: white; padding: 1%; padding-left: 0">Name</th>
+        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef style="width: 100%; color: white; padding: 1%; padding-left: 0">Description</th>
+        <td mat-cell *matCellDef="let element">{{ element.description }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="color">
+        <th mat-header-cell *matHeaderCellDef style="width: 30%; color: white; padding: 1%; padding-left: 0">Color</th>
+        <td mat-cell *matCellDef="let element">{{ element.color }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="size">
+        <th mat-header-cell *matHeaderCellDef style="width: 30%; color: white; padding: 1%; padding-left: 0">Size</th>
+        <td mat-cell *matCellDef="let element">{{ element.size }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef style="width: 30%; color: white; padding: 1%; padding-left: 0">Status</th>
+        <td mat-cell *matCellDef="let element">{{ element.status }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="created_at">
+        <th mat-header-cell *matHeaderCellDef style="width: 30%; color: white; padding: 1%; padding-left: 0">Created at</th>
+        <td mat-cell *matCellDef="let element">{{ element.createdAt | date: 'dd/MM/yyyy' }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="updated_at">
+        <th mat-header-cell *matHeaderCellDef style="width: 30%; color: white; padding: 1%; padding-left: 0">Updated at</th>
+        <td mat-cell *matCellDef="let element">{{ element.updatedAt | date: 'dd/MM/yyyy' }}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  </div>
+
   <div class="table-responsive" id="entities" *ngIf="products && products.length > 0">
     <table class="table table-striped" aria-describedby="page-heading">
       <thead>
         <tr appSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
-          <th scope="col" appsortby="id"><span appTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" appsortby="name"><span appTranslate="wearecactusApp.product.name">Name</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" appsortby="id">
+            <span appTranslate="global.field.id">ID</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appsortby="name">
+            <span appTranslate="wearecactusApp.product.name">Name</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
           <th scope="col" appsortby="description">
-            <span appTranslate="wearecactusApp.product.description">Description</span> <fa-icon icon="sort"></fa-icon>
+            <span appTranslate="wearecactusApp.product.description">Description</span>
+            <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" appsortby="color">
-            <span appTranslate="wearecactusApp.product.color">Color</span> <fa-icon icon="sort"></fa-icon>
+            <span appTranslate="wearecactusApp.product.color">Color</span>
+            <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" appsortby="size">
-            <span appTranslate="wearecactusApp.product.size">Size 1</span> <fa-icon icon="sort"></fa-icon>
+            <span appTranslate="wearecactusApp.product.size">Size 1</span>
+            <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" appsortby="status">
-            <span appTranslate="wearecactusApp.product.status">Status</span> <fa-icon icon="sort"></fa-icon>
+            <span appTranslate="wearecactusApp.product.status">Status</span>
+            <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" appsortby="createdAt">
-            <span appTranslate="wearecactusApp.product.createdAt">Created At</span> <fa-icon icon="sort"></fa-icon>
+            <span appTranslate="wearecactusApp.product.createdAt">Created At</span>
+            <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" appsortby="updatedAt">
-            <span appTranslate="wearecactusApp.product.updatedAt">Updated At</span> <fa-icon icon="sort"></fa-icon>
+            <span appTranslate="wearecactusApp.product.updatedAt">Updated At</span>
+            <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col"></th>
         </tr>
