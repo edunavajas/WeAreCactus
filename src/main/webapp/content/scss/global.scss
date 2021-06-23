@@ -395,3 +395,14 @@ tr.mat-header-row {
 .mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
   color: #dfe7fb;
 }
+
+.state-circle {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-radius: 100px;
+  margin-top: 0.1em;
+  padding-top: 0.8em;
+  margin-left: 0.5em;
+}
