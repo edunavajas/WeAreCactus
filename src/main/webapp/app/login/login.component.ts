@@ -39,10 +39,14 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.accountService.identity().subscribe(() => {
-      if (this.accountService.isAuthenticated()) {
-        this.router.navigate(['']);
+      if (this.isAuthenticated()) {
+        this.router.navigate(['/product']);
       }
     });
+  }
+
+  isAuthenticated(): boolean {
+    return this.accountService.isAuthenticated();
   }
 
   changeLanguage(languageKey: string): void {

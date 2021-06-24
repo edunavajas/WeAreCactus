@@ -1,17 +1,13 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
-import { combineLatest } from 'rxjs';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-
 import { IProduct } from '../product.model';
-
 import { ITEMS_PER_PAGE } from 'app/config/pagination.constants';
 import { ProductService } from '../service/product.service';
-import { ProductDeleteDialogComponent } from '../delete/product-delete-dialog.component';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { PRODUCTS_DATA } from 'app/entities/product/list/product.data';
+import { FormBuilder } from '@angular/forms';
+import { ProductFilter } from 'app/entities/product/list/product.filter';
 
 @Component({
   selector: 'app-product',
@@ -32,12 +28,26 @@ export class ProductComponent implements OnInit, AfterViewInit {
   predicate!: string;
   ascending!: boolean;
   ngbPaginationPage = 1;
+  showFilters = false;
+
+  filtrarGroup = this.fb.group({
+    id: [],
+    name: [],
+    description: [],
+    createdAt: [],
+    updatedAt: [],
+    status: [],
+    size: [],
+    color: [],
+  });
+
+  productFilter = new ProductFilter();
 
   constructor(
     protected productService: ProductService,
     protected activatedRoute: ActivatedRoute,
     protected router: Router,
-    protected modalService: NgbModal
+    protected fb: FormBuilder
   ) {}
 
   ngAfterViewInit(): void {
@@ -46,84 +56,32 @@ export class ProductComponent implements OnInit, AfterViewInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  loadPage(page?: number, dontNavigate?: boolean): void {
-    this.isLoading = true;
-    const pageToLoad: number = page ?? this.page ?? 1;
-
-    this.productService
-      .query({
-        page: pageToLoad - 1,
-        size: this.itemsPerPage,
-        sort: this.sort(),
-      })
-      .subscribe(
-        (res: HttpResponse<IProduct[]>) => {
-          this.isLoading = false;
-          this.onSuccess(res.body, res.headers, pageToLoad, !dontNavigate);
-        },
-        () => {
-          this.isLoading = false;
-          this.onError();
-        }
-      );
+  filter(): void {
+    this.productFilter = this.createFilterForm();
+    if (this.productFilter.name) {
+      this.dataSource.data = this.dataSource.data.filter(product => product.name === this.productFilter.name);
+    }
   }
 
+  createFilterForm(): ProductFilter {
+    return {
+      ...new ProductFilter(),
+      id: this.filtrarGroup.get(['id'])!.value,
+      name: this.filtrarGroup.get(['name'])!.value,
+      description: this.filtrarGroup.get(['description'])!.value,
+      createdAt: this.filtrarGroup.get(['createdAt'])!.value,
+      updatedAt: this.filtrarGroup.get(['updatedAt'])!.value,
+      status: this.filtrarGroup.get(['status'])!.value,
+      size: this.filtrarGroup.get(['size'])!.value,
+      color: this.filtrarGroup.get(['color'])!.value,
+    };
+  }
   ngOnInit(): void {
-    this.handleNavigation();
+    this.onError();
   }
 
   trackId(index: number, item: IProduct): number {
     return item.id!;
-  }
-
-  delete(product: IProduct): void {
-    const modalRef = this.modalService.open(ProductDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
-    modalRef.componentInstance.product = product;
-    // unsubscribe not needed because closed completes on modal close
-    modalRef.closed.subscribe(reason => {
-      if (reason === 'deleted') {
-        this.loadPage();
-      }
-    });
-  }
-
-  protected sort(): string[] {
-    const result = [this.predicate + ',' + (this.ascending ? 'asc' : 'desc')];
-    if (this.predicate !== 'id') {
-      result.push('id');
-    }
-    return result;
-  }
-
-  protected handleNavigation(): void {
-    combineLatest([this.activatedRoute.data, this.activatedRoute.queryParamMap]).subscribe(([data, params]) => {
-      const page = params.get('page');
-      const pageNumber = page !== null ? +page : 1;
-      const sort = (params.get('sort') ?? data['defaultSort']).split(',');
-      const predicate = sort[0];
-      const ascending = sort[1] === 'asc';
-      if (pageNumber !== this.page || predicate !== this.predicate || ascending !== this.ascending) {
-        this.predicate = predicate;
-        this.ascending = ascending;
-        this.loadPage(pageNumber, true);
-      }
-    });
-  }
-
-  protected onSuccess(data: IProduct[] | null, headers: HttpHeaders, page: number, navigate: boolean): void {
-    this.totalItems = Number(headers.get('X-Total-Count'));
-    this.page = page;
-    if (navigate) {
-      this.router.navigate(['/product'], {
-        queryParams: {
-          page: this.page,
-          size: this.itemsPerPage,
-          sort: this.predicate + ',' + (this.ascending ? 'asc' : 'desc'),
-        },
-      });
-    }
-    this.products = data ?? [];
-    this.ngbPaginationPage = this.page;
   }
 
   protected onError(): void {

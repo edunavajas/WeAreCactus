@@ -207,7 +207,7 @@ a:hover {
 
 app-login {
   height: 100% !important;
-  background: linear-gradient(90deg, #3660a4 0, #724a8e);
+  background: linear-gradient(90deg, #3660a4 0, #375bd2);
   display: block;
 }
 
@@ -405,4 +405,124 @@ tr.mat-header-row {
   margin-top: 0.1em;
   padding-top: 0.8em;
   margin-left: 0.5em;
+}
+
+.btn-primary-finder {
+  max-width: 84px;
+  max-height: 56px;
+  margin: 0 2rem;
+  background-color: #ffffff !important;
+  border-color: #375bd2 !important;
+  color: #375bd2 !important;
+  margin-bottom: 2%;
+}
+.btn-primary-finder:hover {
+  margin: 0 2rem;
+  background-color: rgba(195, 117, 248, 0.2) !important;
+  border-color: #5f5858 !important;
+  color: #5f5858ff !important;
+  margin-bottom: 2%;
+  max-width: 84px;
+  max-height: 56px;
+}
+.btn-clean {
+  margin-right: 2rem;
+  border: 2px solid #abafb3 !important;
+  background-color: #fff !important;
+}
+.btn-clean:hover {
+  margin-right: 2rem;
+  border: 2px solid #000000 !important;
+  background-color: #80808021 !important;
+}
+
+.btn-clean.size {
+  padding: 8px 16px !important;
+}
+
+.btn-find:hover {
+  background-color: #cdd1d7 !important;
+  color: #7f787c !important;
+  border-color: #252e42 !important;
+}
+
+.btn-secondary.size {
+  padding: 8px 16px !important;
+}
+
+// CARD
+
+.card {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  border-radius: 0.75em;
+  padding: 0;
+  transition: all 0.2s ease-in-out;
+}
+
+.card:nth-child(even) {
+  margin: 0 1em;
+}
+
+.card-top {
+  background: #b2dce5;
+  padding: 3em;
+  border-top-left-radius: 0.75em;
+  border-top-right-radius: 0.75em;
+}
+
+.card-top .card-img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  height: 12em;
+  width: auto;
+}
+
+.card-top .overlay {
+  height: 17.75em;
+  width: 100%;
+  border-top-left-radius: 0.75em;
+  border-top-right-radius: 0.75em;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.55);
+  overflow: hidden;
+  transition: all 700ms ease;
+  opacity: 0;
+}
+
+.card-top .overlay h1 {
+  text-align: center;
+  font-weight: 500;
+  color: #fff;
+  transform: translateY(-50%);
+}
+
+.card-top .overlay:hover,
+.card-top .overlay:focus {
+  opacity: 1;
+}
+span.marginFilter {
+  vertical-align: sub;
+}
+div.marginFilter {
+  place-self: center;
+}
+
+.filter-input {
+  border: 2px solid #375bd2 !important;
+}
+
+.form-control {
+  padding: 15px;
+  border: 5px solid #d8d8d8 !important;
+  height: 50px;
+  border-radius: 0px;
+  text-align: center;
+}
+
+.calendar-button {
+  padding: 13px 26px !important;
+  background-color: transparent !important;
+  border-color: #375bd2 !important;
+  color: #375bd2 !important;
 }

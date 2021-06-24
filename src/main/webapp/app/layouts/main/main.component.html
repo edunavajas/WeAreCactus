@@ -3,8 +3,8 @@
 </div>
 
 <div [ngClass]="{ 'container-fluid': isAuthenticated(), 'h-100': !isAuthenticated() }">
-  <div [ngClass]="{ 'card jh-card': isAuthenticated(), 'h-100': !isAuthenticated() }">
-    <router-outlet></router-outlet>
-  </div>
+  <!--  <div [ngClass]="{ 'card jh-card': isAuthenticated(), 'h-100': !isAuthenticated() }">-->
+  <router-outlet></router-outlet>
+  <!--  </div>-->
   <app-footer></app-footer>
 </div>
