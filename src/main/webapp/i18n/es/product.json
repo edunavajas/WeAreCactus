@@ -2,7 +2,19 @@
   "wearecactusApp": {
     "product": {
       "home": {
-        "title": "Productos"
+        "title": "Productos",
+        "notFound": "No se han encontrado productos"
+      },
+      "id": "Id",
+      "name": "Nombre",
+      "description": "Descripción",
+      "color": "Color",
+      "size": "Tamañó",
+      "status": "Estado",
+      "createdAt": "Creado en",
+      "updatedAt": "Actualizado en",
+      "filter": {
+        "filterData": "Filtrar datos"
       }
     }
   }
