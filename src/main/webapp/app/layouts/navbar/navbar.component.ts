@@ -4,7 +4,6 @@ import { TranslateService } from '@ngx-translate/core';
 import { SessionStorageService } from 'ngx-webstorage';
 
 import { VERSION } from 'app/app.constants';
-import { LANGUAGES } from 'app/config/language.constants';
 import { AccountService } from 'app/core/auth/account.service';
 import { LoginService } from 'app/login/login.service';
 
@@ -14,11 +13,10 @@ import { LoginService } from 'app/login/login.service';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
-  inProduction?: boolean;
   isNavbarCollapsed = true;
-  languages = LANGUAGES;
-  openAPIEnabled?: boolean;
   version = '';
+  imgSourceEsp = '../../../../content/images/esp.svg';
+  imgSourceIng = '../../../content/images/ing.svg';
 
   constructor(
     private loginService: LoginService,
@@ -60,9 +58,5 @@ export class NavbarComponent implements OnInit {
 
   toggleNavbar(): void {
     this.isNavbarCollapsed = !this.isNavbarCollapsed;
-  }
-
-  getImageUrl(): string {
-    return this.isAuthenticated() ? this.accountService.getImageUrl() : '';
   }
 }

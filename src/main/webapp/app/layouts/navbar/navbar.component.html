@@ -1,6 +1,5 @@
-<nav data-cy="navbar" class="navbar navbar-light navbar-expand-md bg-light" *ngIf="isAuthenticated()">
-  <a class="navbar-brand logo" routerLink="/" (click)="collapseNavbar()">
-    <span class="logo-img"></span>
+<nav data-cy="navbar" class="navbar navbar-light navbar-expand-md bg-light mb-5" *ngIf="isAuthenticated()">
+  <a class="navbar-brand logo p-3" routerLink="/product" (click)="collapseNavbar()">
     <span appTranslate="global.title" class="navbar-title">Wearecactus</span>
     <span class="navbar-version">{{ version }}</span>
   </a>
@@ -18,93 +17,15 @@
   </a>
   <div class="navbar-collapse collapse" id="navbarResponsive" [ngbCollapse]="isNavbarCollapsed" [ngSwitch]="isAuthenticated()">
     <ul class="navbar-nav ml-auto">
-      <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-        <a class="nav-link" routerLink="/" (click)="collapseNavbar()">
-          <span>
-            <fa-icon icon="home"></fa-icon>
-            <span appTranslate="global.menu.home">Home</span>
-          </span>
-        </a>
+      <li class="mr-3">
+        <!--        <a class="dropdown-item" (click)="logout()" id="logout" data-cy="logout">-->
+        <!--          <fa-icon icon="sign-out-alt" [fixedWidth]="true"></fa-icon>-->
+        <!--          <span appTranslate="global.menu.account.logout">Sign out</span>-->
+        <!--        </a>-->
+        <button type="submit" (click)="logout()" class="btn btn-logout w-100 negrita" appTranslate="login.form.signOut">Sign out</button>
       </li>
-      <li
-        *ngSwitchCase="true"
-        ngbDropdown
-        class="nav-item dropdown pointer"
-        display="dynamic"
-        routerLinkActive="active"
-        [routerLinkActiveOptions]="{ exact: true }"
-      >
-        <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="entity-menu" data-cy="entity">
-          <span>
-            <fa-icon icon="th-list"></fa-icon>
-            <span appTranslate="global.menu.entities.main">Entities</span>
-          </span>
-        </a>
-        <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="entity-menu">
-          <li>
-            <a
-              class="dropdown-item"
-              routerLink="product"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-              (click)="collapseNavbar()"
-            >
-              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-              <span appTranslate="global.menu.entities.product">Product</span>
-            </a>
-          </li>
-        </ul>
-      </li>
-      <li ngbDropdown class="nav-item dropdown pointer" display="dynamic" *ngIf="languages && languages.length > 1">
-        <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="languagesnavBarDropdown">
-          <span>
-            <fa-icon icon="flag"></fa-icon>
-            <span appTranslate="global.menu.language">Language</span>
-          </span>
-        </a>
-        <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="languagesnavBarDropdown">
-          <li *ngFor="let language of languages">
-            <a
-              class="dropdown-item"
-              [appActiveMenu]="language"
-              href="javascript:void(0);"
-              (click)="changeLanguage(language); collapseNavbar()"
-              >{{ language | findLanguageFromKey }}</a
-            >
-          </li>
-        </ul>
-      </li>
-      <li
-        ngbDropdown
-        class="nav-item dropdown pointer"
-        display="dynamic"
-        routerLinkActive="active"
-        [routerLinkActiveOptions]="{ exact: true }"
-      >
-        <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="account-menu" data-cy="accountMenu">
-          <span *ngIf="!getImageUrl()">
-            <fa-icon icon="user"></fa-icon>
-            <span appTranslate="global.menu.account.main">Account</span>
-          </span>
-          <span *ngIf="getImageUrl()">
-            <img [src]="getImageUrl()" class="profile-image rounded-circle" alt="Avatar" />
-          </span>
-        </a>
-        <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="account-menu">
-          <li *ngSwitchCase="true">
-            <a class="dropdown-item" (click)="logout()" id="logout" data-cy="logout">
-              <fa-icon icon="sign-out-alt" [fixedWidth]="true"></fa-icon>
-              <span appTranslate="global.menu.account.logout">Sign out</span>
-            </a>
-          </li>
-          <li *ngSwitchCase="false">
-            <a class="dropdown-item" (click)="login()" id="login" data-cy="login">
-              <fa-icon icon="sign-in-alt" [fixedWidth]="true"></fa-icon>
-              <span appTranslate="global.menu.account.login">Sign in</span>
-            </a>
-          </li>
-        </ul>
-      </li>
+      <a><img class="mr-1" style="width: 34px !important; height: auto" [src]="imgSourceEsp" alt="esp" (click)="changeLanguage('es')" /></a>
+      <a><img class="mr-3" style="width: 34px !important; height: auto" [src]="imgSourceIng" alt="ing" (click)="changeLanguage('en')" /></a>
     </ul>
   </div>
 </nav>

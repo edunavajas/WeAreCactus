@@ -6,7 +6,8 @@
       "password": "Contraseña",
       "password.placeholder": "Su contraseña",
       "rememberme": "Iniciar la sesión automáticamente",
-      "button": "Iniciar sesión"
+      "button": "Iniciar sesión",
+      "signOut": "Cerrar sesión"
     },
     "messages": {
       "error": {
