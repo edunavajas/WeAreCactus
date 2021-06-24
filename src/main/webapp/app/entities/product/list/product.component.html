@@ -1,116 +1,231 @@
-<div>
+<div class="p-3">
+  <div class="icon-filter" style="float: right">
+    <button type="button" class="btn btn-primary-finder" (click)="showFilters = !showFilters">
+      <fa-icon icon="filter"></fa-icon>
+    </button>
+  </div>
   <h2 id="page-heading" data-cy="ProductHeading">
-    <span appTranslate="wearecactusApp.product.home.title">Products</span>
-
-    <div class="d-flex justify-content-end">
-      <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
-        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
-        <span appTranslate="wearecactusApp.product.home.refreshListLabel">Refresh List</span>
-      </button>
-
-      <button
-        id="jh-create-entity"
-        data-cy="entityCreateButton"
-        class="btn btn-primary jh-create-entity create-product"
-        [routerLink]="['/product/new']"
-      >
-        <fa-icon icon="plus"></fa-icon>
-        <span appTranslate="wearecactusApp.product.home.createLabel"> Create a new Product </span>
-      </button>
-    </div>
+    <span class="titleColor" appTranslate="wearecactusApp.product.home.title">Products</span>
   </h2>
+  <br />
+  <form name="filterForm" role="form" (ngSubmit)="filter()" [formGroup]="filtrarGroup">
+    <div *ngIf="showFilters">
+      <div class="card ml-4 mr-4 mb-5 mt-0">
+        <div class="card-body">
+          <div>
+            <div class="card-header">
+              <div class="col-12 row pr-0">
+                <div class="col-6 negrita marginFilter pr-0">
+                  <span class="marginFilter" appTranslate="wearecactusApp.product.filter.filterData">Filter data</span>
+                </div>
+                <div class="col-6 d-flex flex-row-reverse pr-0">
+                  <button class="btn btn-secondary size btn-find" type="submit">
+                    <fa-icon icon="search"></fa-icon>
+                  </button>
+                  <button class="btn btn-success btn-clean size" type="button">
+                    <fa-icon icon="times"></fa-icon>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="row mt-3 mb-3 col-12 pr-0">
+              <div class="col-3 mt-1">
+                <label class="form-control-label" appTranslate="wearecactusApp.product.id">Id</label>
+                <input type="text" class="form-control filter-input text-justify" name="id" id="id" formControlName="id" />
+              </div>
+              <div class="col-3 mt-1">
+                <label class="form-control-label" appTranslate="wearecactusApp.product.name">Name</label>
+                <input type="text" class="form-control filter-input text-justify" name="name" id="name" formControlName="name" />
+              </div>
+              <div class="col-3 mt-1">
+                <label class="form-control-label" appTranslate="wearecactusApp.product.description">Description</label>
+                <input
+                  type="text"
+                  class="form-control filter-input text-justify"
+                  name="description"
+                  id="description"
+                  formControlName="description"
+                />
+              </div>
+              <div class="col-3 mt-1">
+                <label class="form-control-label" appTranslate="wearecactusApp.product.color">Color</label>
+                <input type="text" class="form-control filter-input text-justify" name="color" id="color" formControlName="color" />
+              </div>
+              <div class="col-3 mt-1">
+                <label class="form-control-label" appTranslate="wearecactusApp.product.size">Size</label>
+                <input type="text" class="form-control filter-input text-justify" name="size" id="size" formControlName="size" />
+              </div>
+              <div class="col-3 mt-1">
+                <label class="form-control-label" appTranslate="wearecactusApp.product.status">Status</label>
+                <input type="text" class="form-control filter-input text-justify" name="status" id="status" formControlName="status" />
+              </div>
+              <div class="col-3 mt-1">
+                <label class="form-control-label" appTranslate="wearecactusApp.product.createdAt">Created at</label>
+                <div class="d-flex">
+                  <input
+                    type="date"
+                    class="form-control calendar-input filter-input"
+                    name="dpI"
+                    formControlName="createdAt"
+                    ngbDatepicker
+                    #di="ngbDatepicker"
+                    [readOnly]="true"
+                  />
+                  <span class="input-group-append">
+                    <button class="btn btn-outline-secondary calendar-button" (click)="di.toggle()" type="button">
+                      <fa-icon icon="calendar-alt"></fa-icon>
+                    </button>
+                  </span>
+                </div>
+              </div>
+              <div class="col-3 mt-1">
+                <label class="form-control-label" appTranslate="wearecactusApp.product.updatedAt">Updated at</label>
+                <div class="d-flex">
+                  <input
+                    type="date"
+                    class="form-control calendar-input filter-input"
+                    name="dpI"
+                    formControlName="updatedAt"
+                    ngbDatepicker
+                    #df="ngbDatepicker"
+                    [readOnly]="true"
+                  />
+                  <span class="input-group-append">
+                    <button class="btn btn-outline-secondary calendar-button" (click)="df.toggle()" type="button">
+                      <fa-icon icon="calendar-alt"></fa-icon>
+                    </button>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
 
   <div class="alert alert-warning" id="no-result" *ngIf="products?.length === 0">
     <span appTranslate="wearecactusApp.product.home.notFound">No products found</span>
   </div>
 
-  <div class="table-responsive" id="entities" *ngIf="products && products.length > 0">
-    <table class="table table-striped" aria-describedby="page-heading">
-      <thead>
-        <tr appSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
-          <th scope="col" appsortby="id"><span appTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" appsortby="name"><span appTranslate="wearecactusApp.product.name">Name</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" appsortby="description">
-            <span appTranslate="wearecactusApp.product.description">Description</span> <fa-icon icon="sort"></fa-icon>
-          </th>
-          <th scope="col" appsortby="color">
-            <span appTranslate="wearecactusApp.product.color">Color</span> <fa-icon icon="sort"></fa-icon>
-          </th>
-          <th scope="col" appsortby="size">
-            <span appTranslate="wearecactusApp.product.size">Size 1</span> <fa-icon icon="sort"></fa-icon>
-          </th>
-          <th scope="col" appsortby="status">
-            <span appTranslate="wearecactusApp.product.status">Status</span> <fa-icon icon="sort"></fa-icon>
-          </th>
-          <th scope="col" appsortby="createdAt">
-            <span appTranslate="wearecactusApp.product.createdAt">Created At</span> <fa-icon icon="sort"></fa-icon>
-          </th>
-          <th scope="col" appsortby="updatedAt">
-            <span appTranslate="wearecactusApp.product.updatedAt">Updated At</span> <fa-icon icon="sort"></fa-icon>
-          </th>
-          <th scope="col"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let product of products; trackBy: trackId" data-cy="entityTable">
-          <td>
-            <a [routerLink]="['/product', product.id, 'view']">{{ product.id }}</a>
-          </td>
-          <td>{{ product.name }}</td>
-          <td>{{ product.description }}</td>
-          <td>{{ product.color }}</td>
-          <td>{{ product.size }}</td>
-          <td>{{ product.status }}</td>
-          <td>{{ product.createdAt | formatMediumDatetime }}</td>
-          <td>{{ product.updatedAt | formatMediumDatetime }}</td>
-          <td class="text-right">
-            <div class="btn-group">
-              <button
-                type="submit"
-                [routerLink]="['/product', product.id, 'view']"
-                class="btn btn-info btn-sm"
-                data-cy="entityDetailsButton"
-              >
-                <fa-icon icon="eye"></fa-icon>
-                <span class="d-none d-md-inline" appTranslate="entity.action.view">View</span>
-              </button>
+  <div class="mat-elevation-z8">
+    <table mat-table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp table table-striped" [dataSource]="dataSource">
+      <ng-container matColumnDef="id">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="width: 20%; color: white; padding: 1%"
+          appTranslate="wearecactusApp.product.id"
+        >
+          Id
+        </th>
+        <td mat-cell *matCellDef="let element" style="padding-top: 0.5%">{{ element.id }}</td>
+      </ng-container>
 
-              <button
-                type="submit"
-                [routerLink]="['/product', product.id, 'edit']"
-                class="btn btn-primary btn-sm"
-                data-cy="entityEditButton"
-              >
-                <fa-icon icon="pencil-alt"></fa-icon>
-                <span class="d-none d-md-inline" appTranslate="entity.action.edit">Edit</span>
-              </button>
+      <ng-container matColumnDef="name">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="width: 30%; color: white; padding: 1%; padding-left: 0"
+          appTranslate="wearecactusApp.product.name"
+        >
+          Name
+        </th>
+        <td mat-cell *matCellDef="let element" style="padding-top: 0.5%">{{ element.name }}</td>
+      </ng-container>
 
-              <button type="submit" (click)="delete(product)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
-                <fa-icon icon="times"></fa-icon>
-                <span class="d-none d-md-inline" appTranslate="entity.action.delete">Delete</span>
-              </button>
-            </div>
-          </td>
-        </tr>
-      </tbody>
+      <ng-container matColumnDef="description">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="width: 100%; color: white; padding: 1%; padding-left: 0"
+          appTranslate="wearecactusApp.product.description"
+        >
+          Description
+        </th>
+        <td mat-cell *matCellDef="let element" style="padding-top: 0.5%">{{ element.description }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="color">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="width: 30%; color: white; padding: 1%; padding-left: 0"
+          appTranslate="wearecactusApp.product.color"
+        >
+          Color
+        </th>
+        <td mat-cell *matCellDef="let element" style="padding-top: 0.5%">
+          <b class="state-circle" [ngStyle]="{ 'background-color': element.color }"></b>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="size">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="width: 30%; color: white; padding: 1%; padding-left: 0"
+          appTranslate="wearecactusApp.product.size"
+        >
+          Size
+        </th>
+        <td mat-cell *matCellDef="let element" style="padding-top: 0.5%">{{ element.size }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="width: 30%; color: white; padding: 1%; padding-left: 0"
+          appTranslate="wearecactusApp.product.status"
+        >
+          Status
+        </th>
+        <td mat-cell *matCellDef="let element" style="padding-top: 0.5%"><img [src]="element.status | statusPipe" /></td>
+      </ng-container>
+
+      <ng-container matColumnDef="created_at">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="width: 30%; color: white; padding: 1%; padding-left: 0"
+          appTranslate="wearecactusApp.product.createdAt"
+        >
+          Created at
+        </th>
+        <td mat-cell *matCellDef="let element" style="padding-top: 0.5%">{{ element.createdAt | date: 'dd/MM/yyyy' }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="updated_at">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          style="width: 30%; color: white; padding: 1%; padding-left: 0"
+          appTranslate="wearecactusApp.product.updatedAt"
+        >
+          Updated at
+        </th>
+        <td mat-cell *matCellDef="let element" style="padding-top: 0.5%">{{ element.updatedAt | date: 'dd/MM/yyyy' }}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
   </div>
 
   <div *ngIf="products && products.length > 0">
     <div class="row justify-content-center">
       <app-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></app-item-count>
-    </div>
-
-    <div class="row justify-content-center">
-      <ngb-pagination
-        [collectionSize]="totalItems"
-        [(page)]="ngbPaginationPage"
-        [pageSize]="itemsPerPage"
-        [maxSize]="5"
-        [rotate]="true"
-        [boundaryLinks]="true"
-        (pageChange)="loadPage($event)"
-      ></ngb-pagination>
     </div>
   </div>
 </div>
