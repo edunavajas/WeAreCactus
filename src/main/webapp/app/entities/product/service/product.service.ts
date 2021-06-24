@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import * as dayjs from 'dayjs';
 
@@ -14,8 +14,14 @@ export type EntityArrayResponseType = HttpResponse<IProduct[]>;
 @Injectable({ providedIn: 'root' })
 export class ProductService {
   public resourceUrl = this.applicationConfigService.getEndpointFor('api/products');
+  closeModalFunction = new EventEmitter();
+  subsCloseModal?: Subscription;
 
   constructor(protected http: HttpClient, private applicationConfigService: ApplicationConfigService) {}
+
+  onCloseModal(): void {
+    this.closeModalFunction.emit();
+  }
 
   create(product: IProduct): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(product);

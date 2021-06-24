@@ -7,7 +7,6 @@ import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 
 import { IProduct, Product } from '../product.model';
 import { ProductService } from '../service/product.service';
-import { EventEmitterService } from 'app/entities/product/EventEmitterService';
 
 @Component({
   selector: 'app-product-update',
@@ -30,12 +29,7 @@ export class ProductUpdateComponent implements OnInit {
 
   @Input() product?: IProduct;
 
-  constructor(
-    protected productService: ProductService,
-    protected activatedRoute: ActivatedRoute,
-    protected fb: FormBuilder,
-    protected eventEmitterService: EventEmitterService
-  ) {}
+  constructor(protected productService: ProductService, protected activatedRoute: ActivatedRoute, protected fb: FormBuilder) {}
 
   ngOnInit(): void {
     if (this.product) {
@@ -44,7 +38,7 @@ export class ProductUpdateComponent implements OnInit {
   }
 
   close(): void {
-    this.eventEmitterService.onCloseModal();
+    this.productService.onCloseModal();
   }
 
   protected onSaveFinalize(): void {

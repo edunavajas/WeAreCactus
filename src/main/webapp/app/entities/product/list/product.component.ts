@@ -7,7 +7,6 @@ import { MatPaginator } from '@angular/material/paginator';
 import { PRODUCTS_DATA } from './product.data';
 import { FormBuilder } from '@angular/forms';
 import { ProductFilter } from 'app/entities/product/list/product.filter';
-import { EventEmitterService } from 'app/entities/product/EventEmitterService';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -49,8 +48,7 @@ export class ProductComponent implements OnInit, AfterViewInit, OnDestroy {
     protected productService: ProductService,
     protected activatedRoute: ActivatedRoute,
     protected router: Router,
-    protected fb: FormBuilder,
-    protected eventEmitterService: EventEmitterService
+    protected fb: FormBuilder
   ) {}
 
   ngAfterViewInit(): void {
@@ -81,8 +79,8 @@ export class ProductComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    if (this.eventEmitterService.subsCloseModal === undefined) {
-      this.subscription = this.eventEmitterService.closeModalFunction.subscribe(() => {
+    if (this.productService.subsCloseModal === undefined) {
+      this.subscription = this.productService.closeModalFunction.subscribe(() => {
         this.showEdit = false;
       });
     }

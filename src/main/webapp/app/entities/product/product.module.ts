@@ -13,7 +13,6 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSortModule } from '@angular/material/sort';
-import { EventEmitterService } from 'app/entities/product/EventEmitterService';
 
 @NgModule({
   imports: [
@@ -28,7 +27,6 @@ import { EventEmitterService } from 'app/entities/product/EventEmitterService';
     MatInputModule,
     MatSortModule,
   ],
-  providers: [EventEmitterService],
   declarations: [ProductComponent, ProductDetailComponent, ProductUpdateComponent, ProductDeleteDialogComponent],
   entryComponents: [ProductDeleteDialogComponent],
 })
