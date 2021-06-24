@@ -155,8 +155,6 @@ a:hover {
   white-space: nowrap;
 }
 
-// new
-
 .btn.btn-secondary {
   border-color: #375bd2 !important;
   background-color: #fff !important;
@@ -167,12 +165,8 @@ a:hover {
   transition: background-color 0.3s, border-color 0.3s, color 0.3s !important;
 }
 
-//input.w-button {
-//  -webkit-appearance: button !important;
-//}
-
 .btn {
-  padding: 16px 32px !important;
+  padding: 11px 32px !important;
   border: 2px solid #e7e8ea !important;
   border-radius: 4px !important;
   background-color: #e7e8ea !important;
@@ -525,4 +519,8 @@ div.marginFilter {
   background-color: transparent !important;
   border-color: #375bd2 !important;
   color: #375bd2 !important;
+}
+
+.mat-elevation-z8 {
+  height: fit-content;
 }

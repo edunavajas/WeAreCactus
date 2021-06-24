@@ -9,6 +9,7 @@ export interface IProduct {
   status?: string | null;
   createdAt?: dayjs.Dayjs | null;
   updatedAt?: dayjs.Dayjs | null;
+  edit?: string | null;
 }
 
 export class Product implements IProduct {
@@ -20,7 +21,8 @@ export class Product implements IProduct {
     public size?: string | null,
     public status?: string | null,
     public createdAt?: dayjs.Dayjs | null,
-    public updatedAt?: dayjs.Dayjs | null
+    public updatedAt?: dayjs.Dayjs | null,
+    public edit?: string | null
   ) {}
 }
 

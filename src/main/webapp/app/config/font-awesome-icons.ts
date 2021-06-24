@@ -114,4 +114,5 @@ export const fontAwesomeIcons = [
   faCalendarAlt,
   faSlash,
   faCross,
+  faPencilAlt,
 ];

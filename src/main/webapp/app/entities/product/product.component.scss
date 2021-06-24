@@ -25,3 +25,18 @@ td {
 .center {
   text-align: center;
 }
+
+.btn-save {
+  padding: 15px;
+  background-color: white !important;
+  border-color: #375bd2 !important;
+  color: #375bd2 !important;
+  width: 100%;
+  margin-right: 20%;
+}
+
+.btn-save:hover {
+  color: #665f61 !important;
+  background-color: rgba(55, 91, 210, 0.2) !important;
+  border-color: #665f61 !important;
+}
