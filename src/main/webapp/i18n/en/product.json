@@ -3,6 +3,7 @@
     "product": {
       "home": {
         "title": "Products",
+        "edit": "Edit product",
         "notFound": "No products found"
       },
       "id": "Id",
@@ -13,6 +14,7 @@
       "status": "Status",
       "createdAt": "Created at",
       "updatedAt": "Updated at",
+      "save": "Save",
       "filter": {
         "filterData": "Filter data"
       }

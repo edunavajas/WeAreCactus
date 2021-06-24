@@ -3,6 +3,7 @@
     "product": {
       "home": {
         "title": "Productos",
+        "edit": "Editar producto",
         "notFound": "No se han encontrado productos"
       },
       "id": "Id",
@@ -13,6 +14,7 @@
       "status": "Estado",
       "createdAt": "Creado en",
       "updatedAt": "Actualizado en",
+      "save": "Guardar",
       "filter": {
         "filterData": "Filtrar datos"
       }

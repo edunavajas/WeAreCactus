@@ -1,11 +1,10 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IProduct } from '../product.model';
-import { ITEMS_PER_PAGE } from 'app/config/pagination.constants';
 import { ProductService } from '../service/product.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
-import { PRODUCTS_DATA } from 'app/entities/product/list/product.data';
+import { PRODUCTS_DATA } from './product.data';
 import { FormBuilder } from '@angular/forms';
 import { ProductFilter } from 'app/entities/product/list/product.filter';
 
@@ -21,14 +20,13 @@ export class ProductComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator?: MatPaginator;
 
   products?: IProduct[];
-  isLoading = false;
   totalItems = 0;
-  itemsPerPage = ITEMS_PER_PAGE;
   page?: number;
   predicate!: string;
   ascending!: boolean;
   ngbPaginationPage = 1;
   showFilters = false;
+  openSidebar = false;
 
   filtrarGroup = this.fb.group({
     id: [],
@@ -49,6 +47,10 @@ export class ProductComponent implements OnInit, AfterViewInit {
     protected router: Router,
     protected fb: FormBuilder
   ) {}
+
+  toggleSidebar(): void {
+    this.openSidebar = !this.openSidebar;
+  }
 
   ngAfterViewInit(): void {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment

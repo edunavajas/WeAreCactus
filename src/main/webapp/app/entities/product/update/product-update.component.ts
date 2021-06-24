@@ -14,8 +14,9 @@ import { ProductService } from '../service/product.service';
 @Component({
   selector: 'app-product-update',
   templateUrl: './product-update.component.html',
+  styleUrls: ['../product.component.scss'],
 })
-export class ProductUpdateComponent implements OnInit {
+export class ProductUpdateComponent {
   isSaving = false;
 
   editForm = this.fb.group({
@@ -30,18 +31,6 @@ export class ProductUpdateComponent implements OnInit {
   });
 
   constructor(protected productService: ProductService, protected activatedRoute: ActivatedRoute, protected fb: FormBuilder) {}
-
-  ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ product }) => {
-      if (product.id === undefined) {
-        const today = dayjs().startOf('day');
-        product.createdAt = today;
-        product.updatedAt = today;
-      }
-
-      this.updateForm(product);
-    });
-  }
 
   previousState(): void {
     window.history.back();
