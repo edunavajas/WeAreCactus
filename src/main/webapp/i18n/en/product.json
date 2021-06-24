@@ -1,0 +1,23 @@
+{
+  "wearecactusApp": {
+    "product": {
+      "home": {
+        "title": "Products",
+        "edit": "Edit product",
+        "notFound": "No products found"
+      },
+      "id": "Id",
+      "name": "Name",
+      "description": "Description",
+      "color": "Color",
+      "size": "Size",
+      "status": "Status",
+      "createdAt": "Created at",
+      "updatedAt": "Updated at",
+      "save": "Save",
+      "filter": {
+        "filterData": "Filter data"
+      }
+    }
+  }
+}

@@ -1,0 +1,53 @@
+<div>
+  <div class="card">
+    <div class="card-body">
+      <h2>
+        <span class="titleColor" appTranslate="wearecactusApp.product.home.edit">Edit product</span>
+        <button class="btn btn-success btn-clean size m-0" style="float: right" type="button" (click)="close()">
+          <fa-icon icon="times"></fa-icon>
+        </button>
+      </h2>
+      <div class="row justify-content-center pt-3">
+        <div class="col-12">
+          <form class="form" role="form" [formGroup]="editForm">
+            <mat-form-field class="example-full-width w-100">
+              <mat-label>Id</mat-label>
+              <input matInput name="id" id="id" formControlName="id" #id />
+            </mat-form-field>
+            <mat-form-field class="example-full-width w-100">
+              <mat-label>name</mat-label>
+              <input matInput name="name" id="name" type="name" formControlName="name" />
+            </mat-form-field>
+            <mat-form-field class="example-full-width w-100">
+              <mat-label>description</mat-label>
+              <input matInput name="description" id="description" type="description" formControlName="description" />
+            </mat-form-field>
+            <mat-form-field class="example-full-width w-100">
+              <mat-label>color</mat-label>
+              <input matInput name="color" id="color" type="description" formControlName="color" />
+            </mat-form-field>
+            <mat-form-field class="example-full-width w-100">
+              <mat-label>size</mat-label>
+              <input matInput name="size" id="size" type="size" formControlName="size" />
+            </mat-form-field>
+            <mat-form-field class="example-full-width w-100">
+              <mat-label>status</mat-label>
+              <input matInput name="status" id="status" type="status" formControlName="status" />
+            </mat-form-field>
+            <mat-form-field class="example-full-width w-100">
+              <mat-label>createdAt</mat-label>
+              <input matInput name="createdAt" id="createdAt" type="createdAt" formControlName="createdAt" />
+            </mat-form-field>
+            <mat-form-field class="example-full-width w-100">
+              <mat-label>updatedAt</mat-label>
+              <input matInput name="updatedAt" id="updatedAt" type="updatedAt" formControlName="updatedAt" />
+            </mat-form-field>
+            <button type="submit" class="btn btn-save w-100 negrita" appTranslate="wearecactusApp.product.save" (click)="close()">
+              Save
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

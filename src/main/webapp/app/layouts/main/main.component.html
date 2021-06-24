@@ -1,0 +1,7 @@
+<div>
+  <router-outlet name="navbar"></router-outlet>
+</div>
+
+<div [ngClass]="{ 'container-fluid': isAuthenticated(), 'h-100': !isAuthenticated() }">
+  <router-outlet></router-outlet>
+</div>
