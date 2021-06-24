@@ -11,6 +11,7 @@ export const PRODUCTS_DATA: IProduct[] = [
     status: 'active',
     createdAt: dayjs('2021-06-14'),
     updatedAt: dayjs('2021-06-15'),
+    edit: '',
   },
   {
     id: 2,
@@ -21,6 +22,7 @@ export const PRODUCTS_DATA: IProduct[] = [
     status: 'active',
     createdAt: dayjs('2021-06-14'),
     updatedAt: dayjs('2021-06-15'),
+    edit: '',
   },
   {
     id: 3,
@@ -31,6 +33,7 @@ export const PRODUCTS_DATA: IProduct[] = [
     status: 'inactive',
     createdAt: dayjs('2021-06-14'),
     updatedAt: dayjs('2021-06-15'),
+    edit: '',
   },
   {
     id: 4,
@@ -41,6 +44,7 @@ export const PRODUCTS_DATA: IProduct[] = [
     status: 'active',
     createdAt: dayjs('2021-06-14'),
     updatedAt: dayjs('2021-06-15'),
+    edit: '',
   },
   {
     id: 5,
@@ -51,5 +55,6 @@ export const PRODUCTS_DATA: IProduct[] = [
     status: 'inactive',
     createdAt: dayjs('2021-06-14'),
     updatedAt: dayjs('2021-06-15'),
+    edit: '',
   },
 ];

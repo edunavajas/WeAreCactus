@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IProduct } from '../product.model';
 import { ProductService } from '../service/product.service';
@@ -7,14 +7,16 @@ import { MatPaginator } from '@angular/material/paginator';
 import { PRODUCTS_DATA } from './product.data';
 import { FormBuilder } from '@angular/forms';
 import { ProductFilter } from 'app/entities/product/list/product.filter';
+import { EventEmitterService } from 'app/entities/product/EventEmitterService';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
   styleUrls: ['../product.component.scss'],
 })
-export class ProductComponent implements OnInit, AfterViewInit {
-  displayedColumns: string[] = ['id', 'name', 'description', 'color', 'size', 'status', 'created_at', 'updated_at'];
+export class ProductComponent implements OnInit, AfterViewInit, OnDestroy {
+  displayedColumns: string[] = ['id', 'name', 'description', 'color', 'size', 'status', 'created_at', 'updated_at', 'edit'];
   dataSource = new MatTableDataSource<IProduct>(PRODUCTS_DATA);
 
   @ViewChild(MatPaginator) paginator?: MatPaginator;
@@ -26,7 +28,6 @@ export class ProductComponent implements OnInit, AfterViewInit {
   ascending!: boolean;
   ngbPaginationPage = 1;
   showFilters = false;
-  openSidebar = false;
 
   filtrarGroup = this.fb.group({
     id: [],
@@ -40,17 +41,17 @@ export class ProductComponent implements OnInit, AfterViewInit {
   });
 
   productFilter = new ProductFilter();
+  showEdit = false;
+  selectedProduct?: IProduct;
+  subscription?: Subscription;
 
   constructor(
     protected productService: ProductService,
     protected activatedRoute: ActivatedRoute,
     protected router: Router,
-    protected fb: FormBuilder
+    protected fb: FormBuilder,
+    protected eventEmitterService: EventEmitterService
   ) {}
-
-  toggleSidebar(): void {
-    this.openSidebar = !this.openSidebar;
-  }
 
   ngAfterViewInit(): void {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -78,15 +79,26 @@ export class ProductComponent implements OnInit, AfterViewInit {
       color: this.filtrarGroup.get(['color'])!.value,
     };
   }
+
   ngOnInit(): void {
-    this.onError();
+    if (this.eventEmitterService.subsCloseModal === undefined) {
+      this.subscription = this.eventEmitterService.closeModalFunction.subscribe(() => {
+        this.showEdit = false;
+      });
+    }
   }
 
-  trackId(index: number, item: IProduct): number {
-    return item.id!;
+  edit(producto: any): void {
+    this.showEdit = false;
+    setTimeout(() => {
+      this.selectedProduct = producto;
+      this.showEdit = true;
+    }, 1);
   }
 
-  protected onError(): void {
-    this.ngbPaginationPage = this.page ?? 1;
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }

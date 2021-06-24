@@ -1,22 +1,20 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
-import { finalize } from 'rxjs/operators';
 
 import * as dayjs from 'dayjs';
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 
 import { IProduct, Product } from '../product.model';
 import { ProductService } from '../service/product.service';
+import { EventEmitterService } from 'app/entities/product/EventEmitterService';
 
 @Component({
   selector: 'app-product-update',
   templateUrl: './product-update.component.html',
   styleUrls: ['../product.component.scss'],
 })
-export class ProductUpdateComponent {
+export class ProductUpdateComponent implements OnInit {
   isSaving = false;
 
   editForm = this.fb.group({
@@ -30,35 +28,23 @@ export class ProductUpdateComponent {
     updatedAt: [],
   });
 
-  constructor(protected productService: ProductService, protected activatedRoute: ActivatedRoute, protected fb: FormBuilder) {}
+  @Input() product?: IProduct;
 
-  previousState(): void {
-    window.history.back();
-  }
+  constructor(
+    protected productService: ProductService,
+    protected activatedRoute: ActivatedRoute,
+    protected fb: FormBuilder,
+    protected eventEmitterService: EventEmitterService
+  ) {}
 
-  save(): void {
-    this.isSaving = true;
-    const product = this.createFromForm();
-    if (product.id !== undefined) {
-      this.subscribeToSaveResponse(this.productService.update(product));
-    } else {
-      this.subscribeToSaveResponse(this.productService.create(product));
+  ngOnInit(): void {
+    if (this.product) {
+      this.updateForm(this.product);
     }
   }
 
-  protected subscribeToSaveResponse(result: Observable<HttpResponse<IProduct>>): void {
-    result.pipe(finalize(() => this.onSaveFinalize())).subscribe(
-      () => this.onSaveSuccess(),
-      () => this.onSaveError()
-    );
-  }
-
-  protected onSaveSuccess(): void {
-    this.previousState();
-  }
-
-  protected onSaveError(): void {
-    // Api for inheritance.
+  close(): void {
+    this.eventEmitterService.onCloseModal();
   }
 
   protected onSaveFinalize(): void {
