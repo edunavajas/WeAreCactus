@@ -222,10 +222,4 @@
 
     <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
   </div>
-
-  <div *ngIf="products && products.length > 0">
-    <div class="row justify-content-center">
-      <app-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></app-item-count>
-    </div>
-  </div>
 </div>

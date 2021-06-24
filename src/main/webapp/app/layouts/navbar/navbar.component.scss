@@ -6,6 +6,10 @@
 Navbar
 ========================================================================== */
 
+.bg-light {
+  background-color: #f5f7fd !important;
+}
+
 .navbar-version {
   font-size: 0.65em;
   color: $navbar-dark-color;
@@ -41,14 +45,17 @@ Navbar
   }
 }
 
-/* ==========================================================================
-Logo styles
-========================================================================== */
-.logo-img {
-  height: 45px;
-  width: 45px;
-  display: inline-block;
-  vertical-align: middle;
-  background: url('../../../content/images/wearecactus.jpg') no-repeat center center;
-  background-size: contain;
+.btn-logout {
+  padding: 15px;
+  background-color: white !important;
+  border-color: #375bd2 !important;
+  color: #375bd2 !important;
+  width: 100%;
+  margin-right: 20%;
+}
+
+.btn-logout:hover {
+  color: #665f61 !important;
+  background-color: rgba(55, 91, 210, 0.2) !important;
+  border-color: #665f61 !important;
 }
